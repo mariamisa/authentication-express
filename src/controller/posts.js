@@ -6,15 +6,17 @@ const postPage=(req,res)=>{
 
 }
 const createNewPost=(req,res,next)=>{
+    const {description}=req.body;
+    const {id:id_user} =res.user;
+
     const newPost={
-        id_user:res.user.id,
-        description:req.body.description
+        id_user,
+        description
     }
-    createPost(newPost).then(res.redirect('/posts')).catch(next)
+    createPost(newPost).then(res.redirect('/post-page')).catch(next)
 }
 
 const getPostsUser=(req,res,next)=>{
-    console.log(res.user.id);
     getPosts(res.user.id).then(result=>res.json(result.rows)).catch(next)
 }
 module.exports={postPage,createNewPost,getPostsUser}

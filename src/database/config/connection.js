@@ -1,19 +1,18 @@
 const {Pool}=require('pg');
 
 let dbUrl = '';
-
-if (process.env.NODE_ENV === 'test') {
-  dbUrl = process.env.TEST_DB_URL;
-} else if (process.env.NODE_ENV === 'production') {
-  dbUrl = process.env.DATABASE_URL;
+const {NODE_ENV,TEST_DB_URL,DATABASE_URL,DB_URL}=process.env
+if (NODE_ENV === 'test') {
+  dbUrl = TEST_DB_URL;
+} else if (NODE_ENV === 'production') {
+  dbUrl = DATABASE_URL;
 } else {
-  dbUrl = process.env.DB_URL;
+  dbUrl = DB_URL;
 }
-// if (!dbUrl) throw new Error('No Database URL!!!');
-
+if (!dbUrl) throw new Error('No Database URL!!!');
 const options = {
   connectionString: dbUrl,
-  ssl: true,
+  ssl: NODE_ENV==='production',
 };
 
 module.exports = new Pool(options);

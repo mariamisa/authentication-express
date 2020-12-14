@@ -17,7 +17,7 @@ const emailExist=(req,res,next)=>{
     if (result.rows.length!==0) {next()}
     else{
       const error=new Error()
-      error.msg='email dosent exists';
+      error.msg='email doesn\'t exists';
       error.status=400;
       next(error)
     }
