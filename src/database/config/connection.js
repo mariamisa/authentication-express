@@ -12,7 +12,7 @@ if (NODE_ENV === 'test') {
 if (!dbUrl) throw new Error('No Database URL!!!');
 const options = {
   connectionString: dbUrl,
-  ssl: NODE_ENV!=='development',
+  ssl: true,
 };
 
 module.exports = new Pool(options);
