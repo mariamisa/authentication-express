@@ -12,7 +12,7 @@ const protected = (req, res, next) => {
 
 const loginPro = (req, res, next) => {
   if (req.cookies.token) {
-    res.redirect("/posts");
+    res.redirect("/post-page");
   } else {
     next();
   }
